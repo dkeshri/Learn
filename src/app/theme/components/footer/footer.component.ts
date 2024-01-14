@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigurationService } from 'src/app/core/services/configuration.service';
+
 
 @Component({
   selector: 'app-footer',
@@ -8,10 +8,10 @@ import { ConfigurationService } from 'src/app/core/services/configuration.servic
 })
 export class FooterComponent implements OnInit {
   version!:string;
-  constructor(private configurationService : ConfigurationService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.version = this.configurationService.getVersion();
+    this.version = '0.0.0'
   }
 
 }
