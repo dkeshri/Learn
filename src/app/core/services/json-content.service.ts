@@ -1,24 +1,24 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JsonContent } from '../models/content.model';
+import { catchError, throwError } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JsonContentService extends JsonContent{
+export class JsonContentService extends JsonContent {
 
-  constructor(private http: HttpClient) {
+
+  constructor(private apiService: ApiService) {
     super();
   }
   load() {
     let contentFile = "assets/contents/contents.json";
-    return this.http.get<JsonContent>(contentFile)
-      .toPromise()
-      .then(data => {
+    return this.apiService.get<JsonContent>(contentFile)
+      .subscribe((data)=>{
         this.subjects = data?.subjects;
-      })
-      .catch(() => {
-        console.error('Could not load content file');
       });
   }
+  
 }
