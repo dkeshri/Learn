@@ -3,6 +3,7 @@ import { VideoContentService } from '../../services/video-content.service';
 import { JavascriptContentService } from '../../services/javascript-content.service';
 import { CssContentService } from '../../services/css-content.service';
 import { OtherContentService } from '../../services/other-content.service';
+import { DotnetContentService } from '../../services/dotnet-content.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,12 @@ export class HomeComponent implements OnInit {
     private javascriptContent:JavascriptContentService,
     private cssContenetService:CssContentService,
     private otherContentService:OtherContentService,
-    private dotnetContentService:OtherContentService
+    private dotnetContentService:DotnetContentService
     ) { }
 
   ngOnInit(): void {
     console.log(this.videoContentService.getAllContent());
+
     this.javascriptContent.getAllContent().subscribe((data)=>{
       console.log(data);
     });
