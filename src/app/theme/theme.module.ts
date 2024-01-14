@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from './modules/material/material.module';
 
 const COMMON_MODULE = [
   CommonModule,
@@ -22,10 +23,12 @@ const COMMON_MODULE = [
     LogoComponent,
   ],
   imports: [
-    ...COMMON_MODULE
+    ...COMMON_MODULE,
+    MaterialModule
   ],
   exports:[
     ...COMMON_MODULE,
+    MaterialModule,
     BaseLayoutComponent 
   ]
 })
