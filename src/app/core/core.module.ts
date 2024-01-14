@@ -1,6 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { JsonContentService } from './services/json-content.service';
+import { JsonContent } from './models/content.model';
+
+export function initializerFn(jsonAppConfigService: JsonContentService) {
+  return () => {
+    return jsonAppConfigService.load();
+  };
+}
+
 @NgModule({
   declarations: [],
   imports: [
@@ -10,6 +19,19 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
   exports:[
     CommonModule,
     HttpClientModule
+  ],
+  providers:[
+    {
+      provide: JsonContent,
+      deps: [HttpClient],
+      useExisting: JsonContentService
+    },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [JsonContentService],
+      useFactory: initializerFn
+    }
   ]
 })
 export class CoreModule {
