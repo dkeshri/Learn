@@ -7,6 +7,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './modules/material/material.module';
+import { PrimengModule } from './modules/primeng/primeng.module';
 
 const COMMON_MODULE = [
   CommonModule,
@@ -24,11 +25,13 @@ const COMMON_MODULE = [
   ],
   imports: [
     ...COMMON_MODULE,
-    MaterialModule
+    MaterialModule,
+    PrimengModule
   ],
   exports:[
     ...COMMON_MODULE,
     MaterialModule,
+    PrimengModule,
     BaseLayoutComponent 
   ]
 })
