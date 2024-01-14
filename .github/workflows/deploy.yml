@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Build and Deoloy to gh-pages Brarnch 
 
 on:
   # run this workflow manually.
