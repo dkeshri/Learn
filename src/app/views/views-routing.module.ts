@@ -7,7 +7,6 @@ import { BaseLayoutComponent } from '../theme/components/base-layout/base-layout
 const routes: Routes = [
   {
     path: '',
-    component:BaseLayoutComponent,
     children: [
       {
         path: 'home',
