@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Build and Deploy to gh-pages 
 
 on:
   # run this workflow manually.
