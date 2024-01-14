@@ -1,4 +1,4 @@
-name: Build and Deoloy to gh-pages Brarnch 
+name: Build and Deploy to gh-pages 
 
 on:
   # run this workflow manually.
