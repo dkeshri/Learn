@@ -22,7 +22,7 @@ const COMMON_MODULE = [
     LogoComponent,
   ],
   imports: [
-    ...COMMON_MODULE,
+    ...COMMON_MODULE
   ],
   exports:[
     ...COMMON_MODULE,
