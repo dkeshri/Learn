@@ -1,9 +1,12 @@
 name: GitHub Pages
 
 on:
-  push:
-    branches:
-    - master
+  # run this workflow manually.
+  workflow_dispatch:
+    # run workflow automatically when push to master branch.
+    # write now I don't want to trigger auto that is why commented.
+    # push:
+    #   branches: [ "master" ]
 
 jobs:
   deploy:
