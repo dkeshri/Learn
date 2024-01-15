@@ -62,17 +62,9 @@
   }
   
   .row {
-    padding-left: 25px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    row-gap: .5rem;
-    column-gap: 5rem;
-  }
-  
-  .card-grid-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    row-gap: .5rem;
+    row-gap: 1.5rem;
     column-gap: 5rem;
   }
   
