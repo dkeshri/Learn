@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { Option } from '../../../shared/models/option.model';
 
 @Component({
   selector: 'app-header',
@@ -11,21 +12,20 @@ export class HeaderComponent implements OnInit {
   constructor(
   ) { }
   shopName: string = "One Stop Kirana Store";
-  languageSubscription: any;
-  initMenuSubsctiption: any;
+  techOptions: Option[] = [
+    { label: "Javascript", value: "JAVASCRIPT" },
+    { label: "CSS", value: "CSS" },
+    { label: "DotNet", value: "DOTNET" },
+    { label: "Others", value: "OTHERS" }
+  ];
   ngOnInit(): void {
-    
+
   }
   ngOnDestroy() {
-    if (this.languageSubscription) {
-      this.languageSubscription.unsubscribe();
-    }
-    if (this.initMenuSubsctiption) {
-      this.initMenuSubsctiption.unsubscribe();
-    }
+
   }
   onLogout() {
-    
+
   }
- 
+
 }
