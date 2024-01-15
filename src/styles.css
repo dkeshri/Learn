@@ -28,7 +28,7 @@
   
   /* Works on Chrome/Edge/Safari */
   *::-webkit-scrollbar {
-    width: 4px;
+    width: 10px;
   }
   
   *::-webkit-scrollbar-track {
@@ -37,7 +37,7 @@
   
   *::-webkit-scrollbar-thumb {
     background-color: var(--scrollColor);
-    border-radius: 10px;
+    border-radius: 15px;
   
   }
   
@@ -101,4 +101,18 @@
   }
   .p-menubar-root-list{
     flex-wrap: nowrap;
+  }
+
+
+
+  @media screen and (max-width:768px) {
+    *::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--scrollColor);
+      border-radius: 7px;
+    
+    }
   }
