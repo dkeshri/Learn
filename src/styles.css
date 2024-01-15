@@ -102,3 +102,17 @@
   .p-menubar-root-list{
     flex-wrap: nowrap;
   }
+
+
+
+  @media screen and (max-width:768px) {
+    *::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--scrollColor);
+      border-radius: 7px;
+    
+    }
+  }
