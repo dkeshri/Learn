@@ -42,7 +42,7 @@ nav {
 }
 .menu-container{
   display: flex;
-  flex: .8;
+  flex: .6;
   justify-content: space-evenly;
   align-items: center;
 }
