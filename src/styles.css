@@ -28,7 +28,7 @@
   
   /* Works on Chrome/Edge/Safari */
   *::-webkit-scrollbar {
-    width: 10px;
+    width: 4px;
   }
   
   *::-webkit-scrollbar-track {
@@ -37,7 +37,7 @@
   
   *::-webkit-scrollbar-thumb {
     background-color: var(--scrollColor);
-    border-radius: 15px;
+    border-radius: 10px;
   
   }
   
