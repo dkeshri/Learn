@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ThemeModule } from '../theme/theme.module';
 import { VideoCardComponent } from './components/video-card/video-card.component';
-
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 
 @NgModule({
@@ -9,11 +9,13 @@ import { VideoCardComponent } from './components/video-card/video-card.component
     VideoCardComponent
   ],
   imports: [
-    ThemeModule
+    ThemeModule,
+    YouTubePlayerModule
   ],
   exports: [
     ThemeModule,
-    VideoCardComponent
+    VideoCardComponent,
+    YouTubePlayerModule
   ]
 })
 export class SharedModule { }
