@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(
   ) { }
   shopName: string = "One Stop Kirana Store";
+  selectedTech:string = '';
   techOptions: Option[] = [
     { label: "Javascript", value: "JAVASCRIPT" },
     { label: "CSS", value: "CSS" },
@@ -24,8 +25,9 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
 
   }
-  onLogout() {
 
+  onTechnologyCgange() {
+    console.log(this.selectedTech);
   }
 
 }

@@ -13,16 +13,21 @@ export class VideoCardComponent implements OnInit {
   video!: Video;
   constructor() { }
   videoId:string = '';
+  videoTitle:string = '';
 
   ngOnInit(): void {
     let videoId = Util.getYoutubeVideoIdFromUrl(this.video.url);
-    this.videoId = videoId;
+    this.setPropertyToVideoCard(videoId,this.video.title);
   }
 
   ngOnChanges(changes: SimpleChanges):void{
     let videoId = Util.getYoutubeVideoIdFromUrl(this.video.url);
-    console.log(videoId);
+    this.setPropertyToVideoCard(videoId,this.video.title);
+  }
+
+  private setPropertyToVideoCard(videoId:string,videoTitle:string){
     this.videoId = videoId;
+    this.videoTitle = videoTitle;
   }
 
 }
