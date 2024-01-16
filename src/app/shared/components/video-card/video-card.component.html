@@ -3,7 +3,15 @@
         <h3>{{videoTitle}}</h3>
     </div>
     <div class="profile">
+        @defer (on viewport) {
         <youtube-player [height]="180" [width]="320" [videoId]="videoId" suggestedQuality="small"> </youtube-player>
+        } @placeholder {
+            <div class="youtube-placeholder"> 
+                <i class="pi pi-youtube" style="font-size: 2rem"></i>
+                <small>Click to Load!</small>
+            </div>
+        }
+
     </div>
     <div class="website">
         

@@ -40,3 +40,12 @@
     font-weight: 500;
     font-family:serif;
 }
+.youtube-placeholder{
+    display: flex;
+    width: 320px;
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(227, 227, 227);
+    column-gap: 1rem;
+}
