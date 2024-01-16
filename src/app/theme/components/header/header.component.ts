@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  onTechnologyCgange() {
+  onTechnologyChange() {
     console.log(this.selectedTech);
   }
 
