@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   constructor( private localStorageService: LocalStorageService
   ) { }
-  shopName: string = "One Stop Kirana Store";
+  shopName: string = "Technology";
   selectedTech:string = '';
   techOptions: Option[] = [
     { label: "Javascript", value: "JAVASCRIPT" },
