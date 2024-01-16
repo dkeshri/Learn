@@ -1,6 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../../../shared/models/option.model';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { AppConstant } from '../../../core/models/app-constant';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,7 @@ import { Option } from '../../../shared/models/option.model';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(
+  constructor( private localStorageService: LocalStorageService
   ) { }
   shopName: string = "One Stop Kirana Store";
   selectedTech:string = '';
@@ -27,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onTechnologyChange() {
-    console.log(this.selectedTech);
+    this.localStorageService.set(AppConstant.TECH,this.selectedTech);
   }
 
 }
