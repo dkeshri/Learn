@@ -1,6 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../../../shared/models/option.model';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { AppConstant } from '../../../core/models/app-constant';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +11,10 @@ import { Option } from '../../../shared/models/option.model';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(
+  constructor( private localStorageService: LocalStorageService
   ) { }
-  shopName: string = "One Stop Kirana Store";
+  shopName: string = "Technology";
+  selectedTech:string = '';
   techOptions: Option[] = [
     { label: "Javascript", value: "JAVASCRIPT" },
     { label: "CSS", value: "CSS" },
@@ -24,8 +27,9 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
 
   }
-  onLogout() {
 
+  onTechnologyChange() {
+    this.localStorageService.set(AppConstant.TECH,this.selectedTech);
   }
 
 }

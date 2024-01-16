@@ -2,13 +2,10 @@
     <h1>Contents</h1>
     <div class="contents">
         <div class="video-list">
-            <app-video-card></app-video-card>
-            <app-video-card></app-video-card>
-            <app-video-card></app-video-card>
-            <app-video-card></app-video-card>
-            <app-video-card></app-video-card>
+            <ng-container *ngFor="let video of videoList">
+                <app-video-card [video]="video" ></app-video-card>
+            </ng-container>
         </div>
     </div>
-    
 </div>
 

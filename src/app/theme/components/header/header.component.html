@@ -8,7 +8,7 @@
         <input id="customerName" type="text" style="width: 100%;" class="p-inputtext-sm"  pInputText />
     </div>
     <div class="user-detail-container">
-        <p-dropdown class="p-inputtext-sm" placeholder="select technology"
-                            appendTo="body" [options]="techOptions"></p-dropdown>
+        <p-dropdown class="p-inputtext-sm" placeholder="Select Technology" [(ngModel)]="selectedTech"
+        (onChange)="onTechnologyChange()" appendTo="body" [options]="techOptions"></p-dropdown>
     </div>
 </nav>

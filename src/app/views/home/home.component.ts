@@ -4,6 +4,7 @@ import { JavascriptContentService } from '../../services/javascript-content.serv
 import { CssContentService } from '../../services/css-content.service';
 import { OtherContentService } from '../../services/other-content.service';
 import { DotnetContentService } from '../../services/dotnet-content.service';
+import { Video } from '../../core/models/content.model';
 
 @Component({
   selector: 'app-home',
@@ -19,20 +20,21 @@ export class HomeComponent implements OnInit {
     private dotnetContentService:DotnetContentService
     ) { }
 
+   videoList:Video[] = [];
+
   ngOnInit(): void {
-    console.log(this.videoContentService.getAllContent());
 
     this.javascriptContent.getAllContent().subscribe((data)=>{
-      console.log(data);
+      this.videoList.push(...data);
     });
     this.cssContenetService.getAllContent().subscribe((data)=>{
-      console.log(data);
+      this.videoList.push(...data);
     });
     this.otherContentService.getAllContent().subscribe((data)=>{
-      console.log(data);
+      this.videoList.push(...data);
     });
     this.dotnetContentService.getAllContent().subscribe((data)=>{
-      console.log(data);
+      this.videoList.push(...data);
     });
   }
 
