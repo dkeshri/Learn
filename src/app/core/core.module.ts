@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { JsonContentService } from './services/json-content.service';
 import { JsonContent } from './models/content.model';
+import { HttpRequestInterceptor } from './interceptors/http-request.interceptor';
 
 export function initializerFn(jsonAppConfigService: JsonContentService) {
   return () => {
@@ -21,6 +22,11 @@ export function initializerFn(jsonAppConfigService: JsonContentService) {
     HttpClientModule
   ],
   providers:[
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
     {
       provide: JsonContent,
       deps: [HttpClient],
