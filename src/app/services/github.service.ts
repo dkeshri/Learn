@@ -10,9 +10,9 @@ export class GithubService {
   constructor(private apiservice:ApiService) { }
 
   public getCommitList(){
-    let token = '';
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer ' + token);
-    return this.apiservice.get('https://api.github.com/repos/dkeshri/Learn/commits');
+    // let token = '';
+    // let headers = new HttpHeaders();
+    // headers = headers.append('Authorization', 'Bearer ' + token);
+    return this.apiservice.get('/repos/{owner}/{repo}/commits');
   }
 }
