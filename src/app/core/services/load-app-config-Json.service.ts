@@ -14,10 +14,12 @@ export class LoadAppConfigJsonService extends AppConfig {
     super();
   }
   load() {
-    let contentFile = "assets/contents/contents.json";
-    return this.apiService.get<AppConfig>(contentFile)
+    let configFile = "assets/config/config.json";
+    return this.apiService.get<AppConfig>(configFile)
       .subscribe((data)=>{
-        
+        this.githubEndPoint = data?.githubEndPoint;
+        this.githubToken = data?.githubToken;
+        this.version = data?.version;
       });
   }
   
