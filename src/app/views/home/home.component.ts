@@ -6,6 +6,8 @@ import { DotnetContentService } from '../../services/dotnet-content.service';
 import { Video } from '../../core/models/content.model';
 import { GithubService } from '../../services/github.service';
 import { HeaderService } from '../../services/header.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AddTopicComponent } from '../add-topic/add-topic.component';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,8 @@ export class HomeComponent implements OnInit {
     private otherContentService:OtherContentService,
     private dotnetContentService:DotnetContentService,
     private githubService:GithubService,
-    private headerService:HeaderService
+    private headerService:HeaderService,
+    private dialogService: DialogService,
     ) { }
 
    videoList:Video[] = [];
@@ -42,9 +45,9 @@ export class HomeComponent implements OnInit {
       this.videoList.push(...data);
     });
 
-    // this.githubService.getCommitList().subscribe((data)=>{
-
-    // });
+    this.githubService.getCommitList().subscribe((data)=>{
+      console.log(data);
+    });
     this.headerService.getSelectedStack.subscribe((selectedStack)=>{
       this.selectedStack = selectedStack;
       console.log(selectedStack);
@@ -55,4 +58,13 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  onShowTopicDialog() {
+    const ref = this.dialogService.open(AddTopicComponent, {
+      header: 'Add Topic',
+      width: '70%'
+    });
+    ref.onClose.subscribe((unitId: number) => {
+      
+    });
+  }
 }

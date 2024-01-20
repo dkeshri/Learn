@@ -4,7 +4,9 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } fr
 import { LoadAppConfigJsonService } from './services/load-app-config-Json.service';
 import { HttpRequestInterceptor } from './interceptors/http-request.interceptor';
 import { AppConfig } from './models/app-config.model';
-
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 export function initializerFn(loadAppConfigJsonService: LoadAppConfigJsonService) {
   return () => {
     return loadAppConfigJsonService.load();
@@ -19,7 +21,9 @@ export function initializerFn(loadAppConfigJsonService: LoadAppConfigJsonService
   ],
   exports:[
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ConfirmDialogModule,
+    ToastModule,
   ],
   providers:[
     {
@@ -37,7 +41,8 @@ export function initializerFn(loadAppConfigJsonService: LoadAppConfigJsonService
       multi: true,
       deps: [LoadAppConfigJsonService],
       useFactory: initializerFn
-    }
+    },
+    MessageService,ConfirmationService
   ]
 })
 export class CoreModule {

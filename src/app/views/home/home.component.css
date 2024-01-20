@@ -5,3 +5,9 @@
     flex-wrap: wrap;
     row-gap: 1.5rem;
 }
+.head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

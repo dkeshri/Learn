@@ -1,5 +1,11 @@
 <div class="container">
-    <h1>Contents</h1>
+    <div class="head">
+        <h1>Contents</h1>
+        <button (click)="onShowTopicDialog()"
+            mat-mini-fab color="primary">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
     <div class="contents">
         <div class="video-list">
             <ng-container *ngFor="let video of videoList">
