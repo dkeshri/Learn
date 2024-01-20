@@ -4,7 +4,6 @@ import { CssContentService } from '../../services/css-content.service';
 import { OtherContentService } from '../../services/other-content.service';
 import { DotnetContentService } from '../../services/dotnet-content.service';
 import { Video } from '../../core/models/content.model';
-import { GithubService } from '../../services/github.service';
 import { HeaderService } from '../../services/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AddTopicComponent } from '../add-topic/add-topic.component';
@@ -21,7 +20,6 @@ export class HomeComponent implements OnInit {
     private cssContenetService:CssContentService,
     private otherContentService:OtherContentService,
     private dotnetContentService:DotnetContentService,
-    private githubService:GithubService,
     private headerService:HeaderService,
     private dialogService: DialogService,
     ) { }
@@ -43,10 +41,6 @@ export class HomeComponent implements OnInit {
     });
     this.dotnetContentService.getAllContent().subscribe((data)=>{
       this.videoList.push(...data);
-    });
-
-    this.githubService.getCommitList().subscribe((data)=>{
-      console.log(data);
     });
     this.headerService.getSelectedStack.subscribe((selectedStack)=>{
       this.selectedStack = selectedStack;

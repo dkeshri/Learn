@@ -9,6 +9,7 @@ export class HeaderService {
   private stack = new BehaviorSubject('');
   private searchedTopic = new BehaviorSubject('');
 
+
   getSelectedStack = this.stack.asObservable();
   getSearchedTopic = this.searchedTopic.asObservable();
 
@@ -21,4 +22,5 @@ export class HeaderService {
   setSearchedTopic(value:string){
     this.searchedTopic.next(value);
   }
+
 }

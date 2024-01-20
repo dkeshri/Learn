@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Topic } from '../Models/topic-model';
+import { GithubService } from '../../services/github.service';
 
 @Component({
   selector: 'app-add-topic',
@@ -27,7 +28,9 @@ export class AddTopicComponent {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: DynamicDialogRef,
-    private messageService: MessageService,){
+    private messageService: MessageService,
+    private githubService:GithubService,
+    ){
     
   }
   onSave(){
@@ -35,10 +38,13 @@ export class AddTopicComponent {
     topic.title = this.topicForm.controls['title'].value;
     topic.url = this.topicForm.controls['url'].value;
     topic.token = this.topicForm.controls['token'].value;
+    this.githubService.getCommitList(topic.token).subscribe((data)=>{
+      console.log(data);
+    });
 
     // here we will call github lib.
-        // when we want to send some data to parent coomponent. here not required
-    this.dialogRef?.close(1);
+    // when we want to send some data to parent coomponent. here not required
+    //this.dialogRef?.close(1);
     this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });
   }
 }

@@ -7,12 +7,17 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HeaderService } from '../../services/header.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { AppConstant } from '../models/app-constant';
 
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 
-  constructor(private configurationService:ConfigurationService) {}
+  constructor(private configurationService:ConfigurationService,
+    private localStorageService:LocalStorageService) {
+    }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let githubEndPoint = this.configurationService.getGithubEndpoint();
@@ -22,17 +27,32 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     if(request.url.indexOf('{owner}') >= 0){
       let url = request.url;
+      let passKey = this.localStorageService.get(AppConstant.PASSKEY);
+      this.localStorageService.remove(AppConstant.PASSKEY);
+      let keys = this.parsePassKey(passKey);
+      if(keys){
+        token = keys[0] + token + keys[1];
+        console.log(token);
+      }
       request = request.clone({
         url: githubEndPoint+this.ReplaceReqUrl(url,owner,repo),
         headers: request.headers.set('Authorization', 'Bearer ' + token)
       });
     }
-    
     return next.handle(request);
   }
 
   private ReplaceReqUrl(url:string, owner:string, repo:string){
     let newUrl = url.replace('{owner}',owner).replace('{repo}',repo);
     return newUrl;
+  }
+  private parsePassKey(value:string | null){
+    let keys = [] as string[];
+    if(value){
+      keys.push(value.slice(0, 3));
+      keys.push(value.slice(3));
+      return keys;
+    }
+    return null;
   }
 }
