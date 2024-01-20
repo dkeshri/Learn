@@ -1,5 +1,30 @@
-<div>
-    <div class="action-container">
-        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+<form [formGroup]="unitForm">
+    <div class="topicDetails">
+        <div class="row">
+            <div class="p-field">
+                <label for="title">Title</label>
+                <input formControlName="title" id="title" type="text" class="p-inputtext-sm" pInputText />
+                <small style="color:red" *ngIf="topicTitle.errors?.['required']
+                    && (topicTitle.touched || topicTitle.dirty)
+                ">Title can not be blank</small>
+            </div>
+            <div class="p-field">
+                <label for="url">URL</label>
+                <input formControlName="url" id="url" type="text" class="p-inputtext-sm" pInputText />
+                <small style="color:red" *ngIf="topicURL.errors?.['required']
+                    && (topicURL.touched || topicURL.dirty)
+                ">Url can not be blank</small>
+            </div>
+            <div class="p-field">
+                <label for="token">Token</label>
+                <input formControlName="token" id="url" type="text" class="p-inputtext-sm" pInputText />
+                <small style="color:red" *ngIf="topicToken.errors?.['required']
+                    && (topicToken.touched || topicToken.dirty)
+                ">Token can not be blank</small>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="action-container">
+        <button [disabled]="this.unitForm.invalid" class="btn" (click)="onSave()" mat-raised-button color="primary">Save</button>
+    </div>
+</form>
