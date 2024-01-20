@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoContentService } from '../../services/video-content.service';
 import { JavascriptContentService } from '../../services/javascript-content.service';
 import { CssContentService } from '../../services/css-content.service';
 import { OtherContentService } from '../../services/other-content.service';
@@ -15,7 +14,7 @@ import { HeaderService } from '../../services/header.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private videoContentService: VideoContentService,
+  constructor(
     private javascriptContent:JavascriptContentService,
     private cssContenetService:CssContentService,
     private otherContentService:OtherContentService,

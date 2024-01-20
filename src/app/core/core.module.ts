@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { JsonContentService } from './services/json-content.service';
-import { JsonContent } from './models/content.model';
+import { LoadAppConfigJsonService } from './services/load-app-config-Json.service';
 import { HttpRequestInterceptor } from './interceptors/http-request.interceptor';
+import { AppConfig } from './models/app-config.model';
 
-export function initializerFn(jsonAppConfigService: JsonContentService) {
+export function initializerFn(loadAppConfigJsonService: LoadAppConfigJsonService) {
   return () => {
-    return jsonAppConfigService.load();
+    return loadAppConfigJsonService.load();
   };
 }
 
@@ -28,14 +28,14 @@ export function initializerFn(jsonAppConfigService: JsonContentService) {
       multi: true
     },
     {
-      provide: JsonContent,
+      provide: AppConfig,
       deps: [HttpClient],
-      useExisting: JsonContentService
+      useExisting: LoadAppConfigJsonService
     },
     {
       provide: APP_INITIALIZER,
       multi: true,
-      deps: [JsonContentService],
+      deps: [LoadAppConfigJsonService],
       useFactory: initializerFn
     }
   ]
