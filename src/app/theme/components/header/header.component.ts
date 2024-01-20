@@ -1,8 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../../../shared/models/option.model';
-import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { AppConstant } from '../../../core/models/app-constant';
+import { HeaderService } from '../../../services/header.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +10,8 @@ import { AppConstant } from '../../../core/models/app-constant';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private localStorageService: LocalStorageService
+  constructor( 
+    private headerService : HeaderService
   ) { }
   shopName: string = "Technology";
   selectedTech:string = '';
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onTechnologyChange() {
-    this.localStorageService.set(AppConstant.TECH,this.selectedTech);
+    this.headerService.setSelectedStack(this.selectedTech);
   }
 
 }

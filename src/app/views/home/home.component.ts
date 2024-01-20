@@ -6,6 +6,7 @@ import { OtherContentService } from '../../services/other-content.service';
 import { DotnetContentService } from '../../services/dotnet-content.service';
 import { Video } from '../../core/models/content.model';
 import { GithubService } from '../../services/github.service';
+import { HeaderService } from '../../services/header.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
     private cssContenetService:CssContentService,
     private otherContentService:OtherContentService,
     private dotnetContentService:DotnetContentService,
-    private githubService:GithubService
+    private githubService:GithubService,
+    private headerService:HeaderService
     ) { }
 
    videoList:Video[] = [];
@@ -39,9 +41,12 @@ export class HomeComponent implements OnInit {
       this.videoList.push(...data);
     });
 
-    this.githubService.getCommitList().subscribe((data)=>{
-      console.log(data);
-    });
+    // this.githubService.getCommitList().subscribe((data)=>{
+
+    // });
+    this.headerService.getSelectedStack.subscribe((selectedStack)=>{
+      console.log(selectedStack);
+    })
   }
 
 }
