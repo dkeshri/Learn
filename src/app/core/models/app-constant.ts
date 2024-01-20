@@ -1,3 +1,3 @@
 export class AppConstant{
-    static readonly  TECH = 'TECH';
+    public static readonly PASSKEY = 'PassKey';
 }

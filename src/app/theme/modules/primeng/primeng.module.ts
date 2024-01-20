@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
-
+import {DialogService, DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef} from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [],
   imports: [
@@ -15,8 +15,9 @@ import {CheckboxModule} from 'primeng/checkbox';
     ButtonModule,
     DividerModule,
     DropdownModule,
-    CheckboxModule
+    CheckboxModule,
+    DynamicDialogModule
   ],
-  providers:[]
+  providers:[DialogService,DynamicDialogRef,DynamicDialogConfig]
 })
 export class PrimengModule { }

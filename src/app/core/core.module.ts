@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { JsonContentService } from './services/json-content.service';
-import { JsonContent } from './models/content.model';
-
-export function initializerFn(jsonAppConfigService: JsonContentService) {
+import { LoadAppConfigJsonService } from './services/load-app-config-Json.service';
+import { HttpRequestInterceptor } from './interceptors/http-request.interceptor';
+import { AppConfig } from './models/app-config.model';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+export function initializerFn(loadAppConfigJsonService: LoadAppConfigJsonService) {
   return () => {
-    return jsonAppConfigService.load();
+    return loadAppConfigJsonService.load();
   };
 }
 
@@ -18,20 +21,28 @@ export function initializerFn(jsonAppConfigService: JsonContentService) {
   ],
   exports:[
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ConfirmDialogModule,
+    ToastModule,
   ],
   providers:[
     {
-      provide: JsonContent,
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+    {
+      provide: AppConfig,
       deps: [HttpClient],
-      useExisting: JsonContentService
+      useExisting: LoadAppConfigJsonService
     },
     {
       provide: APP_INITIALIZER,
       multi: true,
-      deps: [JsonContentService],
+      deps: [LoadAppConfigJsonService],
       useFactory: initializerFn
-    }
+    },
+    MessageService,ConfirmationService
   ]
 })
 export class CoreModule {
