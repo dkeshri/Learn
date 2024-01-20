@@ -13,8 +13,8 @@ export class AddTopicComponent {
     
   }
   onSave(){
-    // when we want to send some data
+    // when we want to send some data to parent coomponent. here not required
     this.dialogRef?.close(1);
-      this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });
+    this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });
   }
 }
