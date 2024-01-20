@@ -5,7 +5,8 @@
         </div>
     </div>
     <div class="menu-container">
-        <input id="customerName" type="text" style="width: 100%;" class="p-inputtext-sm"  pInputText />
+        <input id="search-topic" type="text" style="width: 100%;" class="p-inputtext-sm"  pInputText
+        (keydown.enter)="onEnterPress($event)" [(ngModel)]="searchTopic" />
     </div>
     <div class="user-detail-container">
         <p-dropdown class="p-inputtext-sm" placeholder="Select Stack" [(ngModel)]="selectedTech"

@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   ) { }
   shopName: string = "Technology";
   selectedTech:string = '';
+  searchTopic:string = '';
   techOptions: Option[] = [
     { label: "Javascript", value: "JAVASCRIPT" },
     { label: "CSS", value: "CSS" },
@@ -30,6 +31,9 @@ export class HeaderComponent implements OnInit {
 
   onTechnologyChange() {
     this.headerService.setSelectedStack(this.selectedTech);
+  }
+  onEnterPress(event:any){
+    this.headerService.setSearchedTopic(this.searchTopic);
   }
 
 }

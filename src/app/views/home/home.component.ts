@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
     ) { }
 
    videoList:Video[] = [];
+   selectedStack!:string;
+   searchedTopic!:string;
 
   ngOnInit(): void {
 
@@ -45,7 +47,12 @@ export class HomeComponent implements OnInit {
 
     // });
     this.headerService.getSelectedStack.subscribe((selectedStack)=>{
+      this.selectedStack = selectedStack;
       console.log(selectedStack);
+    })
+    this.headerService.getSearchedTopic.subscribe((topic)=>{
+      this.searchedTopic = topic;
+      console.log(topic);
     })
   }
 
