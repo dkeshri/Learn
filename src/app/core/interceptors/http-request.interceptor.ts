@@ -32,7 +32,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       let keys = this.parsePassKey(passKey);
       if(keys){
         token = keys[0] + token + keys[1];
-        console.log(token);
       }
       request = request.clone({
         url: githubEndPoint+this.ReplaceReqUrl(url,owner,repo),
