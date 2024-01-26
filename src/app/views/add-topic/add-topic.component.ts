@@ -14,8 +14,7 @@ import { Video } from '../../core/models/content.model';
 export class AddTopicComponent {
   topicForm: FormGroup = this.formBuilder.group({
     title: ['', [Validators.required]],
-    url: ['',[Validators.required]],
-    token:['',[Validators.required]]
+    url: ['',[Validators.required]]
   });
   get topicTitle() {
     return this.topicForm.get('title') as FormControl;
@@ -38,9 +37,6 @@ export class AddTopicComponent {
     let topic = {} as Topic;
     topic.title = this.topicForm.controls['title'].value;
     topic.url = this.topicForm.controls['url'].value;
-    topic.token = this.topicForm.controls['token'].value;
-
-    let passKey = topic.token;
     let fileName = 'other.json';
     // here we will call github lib.
     this.githubService.getAssetFileDetails(fileName).subscribe((data)=>{
@@ -48,8 +44,7 @@ export class AddTopicComponent {
       let jsonData = JSON.parse(content) as Video[];
       let newVideo = {title:topic.title,url:topic.url} as Video;
       jsonData.push(newVideo);
-      this.githubService.saveAssetFileContent(fileName,JSON.stringify(jsonData),data.sha,passKey).subscribe((data)=>{
-        console.log(data);
+      this.githubService.saveAssetFileContent(fileName,JSON.stringify(jsonData),data.sha).subscribe((data)=>{
         this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });
       });
     });
