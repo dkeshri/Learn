@@ -17,9 +17,13 @@ export class LoadAppConfigJsonService extends AppConfig {
     let configFile = "assets/config/config.json";
     return this.apiService.get<AppConfig>(configFile)
       .subscribe((data)=>{
-        this.githubEndPoint = data?.githubEndPoint;
-        this.githubToken = data?.githubToken;
-        this.version = data?.version;
+        this.githubEndPoint = data.githubEndPoint;
+        this.githubToken = data.githubToken;
+        this.version = data.version;
+        this.branch = data.branch;
+        this.contentDir = data.contentDir;
+        this.owner = data.owner;
+        this.repo = data.repo;
       });
   }
   

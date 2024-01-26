@@ -15,4 +15,16 @@ export class ConfigurationService {
   getGithubToken():string{
     return this.appConfig.githubToken;
   }
+  getBranch():string{
+    return this.appConfig.branch;
+  }
+  getContentDir():string{
+    return this.appConfig.contentDir;
+  }
+  getOwner(){
+    return this.appConfig.owner;
+  }
+  getRepo(){
+    return this.appConfig.repo;
+  }
 }
