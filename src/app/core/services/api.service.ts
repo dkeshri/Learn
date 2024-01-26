@@ -9,8 +9,8 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get<T>(path: string, params?: any): Observable<T> {
-    return this.httpClient.get<T>(`${path}`, { observe: 'body', params })
+  get<T>(path: string, params?: any, headers?: any): Observable<T> {
+    return this.httpClient.get<T>(`${path}`, { observe: 'body', params, headers })
       .pipe(
         catchError(this.handleError)
       );

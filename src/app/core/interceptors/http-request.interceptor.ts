@@ -31,6 +31,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       request = request.clone({
         url: githubEndPoint+this.ReplaceReqUrl(url,owner,repo),
         headers: request.headers.set('Authorization', 'Bearer ' + token)
+        .set('Accept', 'application/vnd.github+json')
       });
     }
     return next.handle(request);

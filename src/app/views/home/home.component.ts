@@ -52,12 +52,21 @@ export class HomeComponent implements OnInit {
       this.searchedTopic = topic;
     });
 
-    this.githubService.testApi().subscribe((data)=>{
+    this.githubService.getAssetFileContent('other.json').subscribe((data)=>{
       console.log(data);
+      let content = atob(data.content)
+      let jsonData = JSON.parse(content) as Video[];
+      console.log(jsonData);
+      // let newVideo = {title:'New Content566',url:'https://text.com'} as Video;
+      // jsonData.push(newVideo);
+      
+      // this.githubService.saveAssetFileContent('other.json',JSON.stringify(jsonData),data.sha).subscribe((data)=>{
+        
+      // });
+
+
+
     });
-    // this.githubService.getRootContentByBranchName().subscribe((data)=>{
-    //   console.log(data);
-    // });
   }
 
   onShowTopicDialog() {
