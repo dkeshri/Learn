@@ -3,21 +3,21 @@
         <div class="row">
             <div class="p-field">
                 <label for="title">Title</label>
-                <input formControlName="title" id="title" type="text" class="p-inputtext-sm" pInputText />
+                <input formControlName="title" id="title" type="text" class="p-inputtext-sm topic-input" pInputText />
                 <small style="color:red" *ngIf="topicTitle.errors?.['required']
                     && (topicTitle.touched || topicTitle.dirty)
                 ">Title can not be blank</small>
             </div>
             <div class="p-field">
                 <label for="url">URL</label>
-                <input formControlName="url" id="url" type="text" class="p-inputtext-sm" pInputText />
+                <input formControlName="url" id="url" type="text" class="p-inputtext-sm topic-input" pInputText />
                 <small style="color:red" *ngIf="topicURL.errors?.['required']
                     && (topicURL.touched || topicURL.dirty)
                 ">Url can not be blank</small>
             </div>
             <div class="p-field">
                 <label for="token">Token</label>
-                <input formControlName="token" id="url" type="text" class="p-inputtext-sm" pInputText />
+                <input formControlName="token" id="url" type="text" class="p-inputtext-sm topic-input" pInputText />
                 <small style="color:red" *ngIf="topicToken.errors?.['required']
                     && (topicToken.touched || topicToken.dirty)
                 ">Token can not be blank</small>
