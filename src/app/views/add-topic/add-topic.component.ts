@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Topic } from '../Models/topic-model';
 import { GithubService } from '../../services/github.service';
+import { Video } from '../../core/models/content.model';
 
 @Component({
   selector: 'app-add-topic',
@@ -38,16 +39,25 @@ export class AddTopicComponent {
     topic.title = this.topicForm.controls['title'].value;
     topic.url = this.topicForm.controls['url'].value;
     topic.token = this.topicForm.controls['token'].value;
-    this.githubService.getCommitList(topic.token).subscribe((data)=>{
-      console.log(data);
+
+    let passKey = topic.token;
+    let fileName = 'other.json';
+    // here we will call github lib.
+    this.githubService.getAssetFileContent(fileName,passKey).subscribe((data)=>{
+      let content = atob(data.content)
+      let jsonData = JSON.parse(content) as Video[];
+      let newVideo = {title:topic.title,url:topic.url} as Video;
+      jsonData.push(newVideo);
+      this.githubService.saveAssetFileContent(fileName,JSON.stringify(jsonData),data.sha,passKey).subscribe((data)=>{
+        console.log(data);
+        this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });
+      });
     });
 
-    // here we will call github lib.
-    this.githubService.saveTopic(topic).subscribe((data)=>{
-      console.log(data);
-    });
+
+
     // when we want to send some data to parent coomponent. here not required
     //this.dialogRef?.close(1);
-    this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });
+    
   }
 }

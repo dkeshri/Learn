@@ -10,6 +10,7 @@ export interface GitCommitFile{
     committer:GitCommitter;
     content:string;
     sha:string;
+    branch:string;
 }
 
 export interface GitCommitter{

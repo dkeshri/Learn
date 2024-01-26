@@ -5,6 +5,7 @@ import { AppConstant } from '../core/models/app-constant';
 import { Topic } from '../views/Models/topic-model';
 import { HttpParams } from '@angular/common/http';
 import { GitCommitFile, GitCommitter, GithubFile } from '../views/Models/github-file-model';
+import { Video } from '../core/models/content.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,20 +24,19 @@ export class GithubService {
     this.localStorageService.set(AppConstant.PASSKEY,token);
     return this.apiservice.get(`${this.repoUrl}/commits`);
   }
-  public saveTopic(topic:Topic){
+  public saveTopic(topic:Topic,fileName:string){
     this.localStorageService.set(AppConstant.PASSKEY,topic.token);
-    let filePath = 'src/filename';
-    return this.apiservice.get('/repos/{owner}/{repo}/contents/'+filePath);
   }
 
-  public getAssetFileContent(fileName:string){
+  public getAssetFileContent(fileName:string,token:string){
+    this.setPassKey(token);
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
-    let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`;
-    
+    let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`; 
     return this.apiservice.get<GithubFile>(path,params);
   }
-  public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string){
+  public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string,token:string){
+    this.setPassKey(token);
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
     let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`;
@@ -47,6 +47,7 @@ export class GithubService {
     file.committer = user;
     file.content = content;
     file.sha = fileSha;
+    file.branch = this.branchName;
     return this.apiservice.put(path,file);
   }
   public getRootContentByBranchName(branchName?:string){
@@ -54,5 +55,8 @@ export class GithubService {
       branchName = 'master';
     }
     return this.apiservice.get('/repos/{owner}/{repo}/contents?ref='+branchName);
+  }
+  private setPassKey(token:string){
+    this.localStorageService.set(AppConstant.PASSKEY,token);
   }
 }
