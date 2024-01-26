@@ -6,6 +6,7 @@ import { Topic } from '../views/Models/topic-model';
 import { HttpParams } from '@angular/common/http';
 import { GitCommitFile, GitCommitter, GithubFile } from '../views/Models/github-file-model';
 import { Video } from '../core/models/content.model';
+import { ConfigurationService } from '../core/services/configuration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,12 @@ export class GithubService {
   private branchName = 'gh-pages';
   constructor(
     private apiservice:ApiService,
-    private localStorageService:LocalStorageService
-    ) { }
+    private localStorageService:LocalStorageService,
+    private configurationService:ConfigurationService
+    ) { 
+      this.branchName = configurationService.getBranch();
+      this.appContentDir = configurationService.getContentDir();
+    }
 
   public getCommitList(token:string){
     this.localStorageService.set(AppConstant.PASSKEY,token);
