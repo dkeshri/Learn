@@ -7,8 +7,7 @@ import { Video } from '../../core/models/content.model';
 import { HeaderService } from '../../services/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AddTopicComponent } from '../add-topic/add-topic.component';
-import { GithubService } from '../../services/github.service';
-import { Topic } from '../Models/topic-model';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +22,7 @@ export class HomeComponent implements OnInit {
     private otherContentService:OtherContentService,
     private dotnetContentService:DotnetContentService,
     private headerService:HeaderService,
-    private dialogService: DialogService,
-    private githubService:GithubService
+    private dialogService: DialogService
     ) { }
 
    videoList:Video[] = [];
@@ -32,7 +30,6 @@ export class HomeComponent implements OnInit {
    searchedTopic!:string;
 
   ngOnInit(): void {
-
     this.javascriptContent.getAllContent().subscribe((data)=>{
       this.videoList.push(...data);
     });
@@ -58,7 +55,16 @@ export class HomeComponent implements OnInit {
       header: 'Add Topic',
       width: '70%'
     });
-    ref.onClose.subscribe((unitId: number) => {
+    ref.onClose.subscribe((isTopicAdded: number) => {
+      
+    });
+  }
+  onLogin(){
+    const ref = this.dialogService.open(LoginComponent, {
+      header: 'Enter PassKey',
+      width: '50%'
+    });
+    ref.onClose.subscribe((isLogin: number) => {
       
     });
   }

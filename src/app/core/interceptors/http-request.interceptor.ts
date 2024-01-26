@@ -23,7 +23,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     if(request.url.indexOf('{owner}') >= 0){
       let url = request.url;
       let passKey = this.localStorageService.get(AppConstant.PASSKEY);
-      this.localStorageService.remove(AppConstant.PASSKEY);
       let keys = this.parsePassKey(passKey);
       if(keys){
         token = keys[0] + token + keys[1];

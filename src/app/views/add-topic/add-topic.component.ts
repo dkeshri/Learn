@@ -43,7 +43,7 @@ export class AddTopicComponent {
     let passKey = topic.token;
     let fileName = 'other.json';
     // here we will call github lib.
-    this.githubService.getAssetFileContent(fileName,passKey).subscribe((data)=>{
+    this.githubService.getAssetFileDetails(fileName).subscribe((data)=>{
       let content = atob(data.content)
       let jsonData = JSON.parse(content) as Video[];
       let newVideo = {title:topic.title,url:topic.url} as Video;
