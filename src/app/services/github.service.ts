@@ -49,8 +49,7 @@ export class GithubService {
       }));
   }
 
-  public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string,token:string){
-    this.setPassKey(token);
+  public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string){
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
     let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`;
