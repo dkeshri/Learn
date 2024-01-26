@@ -21,4 +21,10 @@ export class ConfigurationService {
   getContentDir():string{
     return this.appConfig.contentDir;
   }
+  getOwner(){
+    return this.appConfig.owner;
+  }
+  getRepo(){
+    return this.appConfig.repo;
+  }
 }

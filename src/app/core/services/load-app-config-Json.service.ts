@@ -22,6 +22,8 @@ export class LoadAppConfigJsonService extends AppConfig {
         this.version = data.version;
         this.branch = data.branch;
         this.contentDir = data.contentDir;
+        this.owner = data.owner;
+        this.repo = data.repo;
       });
   }
   

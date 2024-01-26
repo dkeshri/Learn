@@ -4,4 +4,6 @@ export class AppConfig{
     version!:string;
     branch!:string;
     contentDir!:string;
+    owner!:string;
+    repo!:string;
 }

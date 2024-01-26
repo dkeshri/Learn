@@ -17,8 +17,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let githubEndPoint = this.configurationService.getGithubEndpoint();
     let token = this.configurationService.getGithubToken();
-    let owner = 'dkeshri';
-    let repo = 'Learn';
+    let owner = this.configurationService.getOwner();
+    let repo = this.configurationService.getRepo();
 
     if(request.url.indexOf('{owner}') >= 0){
       let url = request.url;
