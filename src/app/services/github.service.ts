@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { GitCommitFile, GitCommitter, GithubFile } from '../views/Models/github-file-model';
 import { Video } from '../core/models/content.model';
 import { ConfigurationService } from '../core/services/configuration.service';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,21 @@ export class GithubService {
     this.localStorageService.set(AppConstant.PASSKEY,topic.token);
   }
 
-  public getAssetFileContent(fileName:string,token:string){
-    this.setPassKey(token);
+  public getAssetFileDetails(fileName:string){
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
     let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`; 
     return this.apiservice.get<GithubFile>(path,params);
   }
+
+  public getContentFromFile(fileName:string) : Observable<Video[]>{
+    return this.getAssetFileDetails(fileName).pipe(
+      map((data) => {
+        let content = atob(data.content);
+        return JSON.parse(content) as Video[];
+      }));
+  }
+
   public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string,token:string){
     this.setPassKey(token);
     let params = new HttpParams();

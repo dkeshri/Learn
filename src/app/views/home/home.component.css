@@ -11,3 +11,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.action-btn{
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
