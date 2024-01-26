@@ -43,6 +43,9 @@ export class AddTopicComponent {
     });
 
     // here we will call github lib.
+    this.githubService.saveTopic(topic).subscribe((data)=>{
+      console.log(data);
+    });
     // when we want to send some data to parent coomponent. here not required
     //this.dialogRef?.close(1);
     this.messageService.add({ severity: 'success', summary: 'Topic Added Successfully', detail: 'Topic Titile', life: 3000 });

@@ -7,6 +7,8 @@ import { Video } from '../../core/models/content.model';
 import { HeaderService } from '../../services/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AddTopicComponent } from '../add-topic/add-topic.component';
+import { GithubService } from '../../services/github.service';
+import { Topic } from '../Models/topic-model';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
     private dotnetContentService:DotnetContentService,
     private headerService:HeaderService,
     private dialogService: DialogService,
+    private githubService:GithubService
     ) { }
 
    videoList:Video[] = [];
@@ -44,12 +47,17 @@ export class HomeComponent implements OnInit {
     });
     this.headerService.getSelectedStack.subscribe((selectedStack)=>{
       this.selectedStack = selectedStack;
-      console.log(selectedStack);
-    })
+    });
     this.headerService.getSearchedTopic.subscribe((topic)=>{
       this.searchedTopic = topic;
-      console.log(topic);
-    })
+    });
+
+    this.githubService.testApi().subscribe((data)=>{
+      console.log(data);
+    });
+    // this.githubService.getRootContentByBranchName().subscribe((data)=>{
+    //   console.log(data);
+    // });
   }
 
   onShowTopicDialog() {
