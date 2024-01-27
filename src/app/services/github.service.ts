@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../core/services/api.service';
 import { LocalStorageService } from '../core/services/local-storage.service';
-import { AppConstant } from '../core/models/app-constant';
-import { Topic } from '../views/Models/topic-model';
 import { HttpParams } from '@angular/common/http';
 import { GitCommitFile, GitCommitter, GithubFile } from '../views/Models/github-file-model';
 import { Video } from '../core/models/content.model';
@@ -20,54 +18,26 @@ export class GithubService {
   private branchName = 'gh-pages';
   private appConfigDir = '/assets/config';
   constructor(
-    private apiservice:ApiService,
-    private localStorageService:LocalStorageService,
-    private configurationService:ConfigurationService
-    ) { 
-      this.branchName = configurationService.getBranch();
-      this.appContentDir = configurationService.getContentDir();
-    }
-
-  public getCommitList(token:string){
-    this.localStorageService.set(AppConstant.PASSKEY,token);
-    return this.apiservice.get(`${this.repoUrl}/commits`);
-  }
-  public saveTopic(topic:Topic,fileName:string){
-    this.localStorageService.set(AppConstant.PASSKEY,topic.token);
+    private apiservice: ApiService,
+    private localStorageService: LocalStorageService,
+    private configurationService: ConfigurationService
+  ) {
+    this.branchName = configurationService.getBranch();
+    this.appContentDir = configurationService.getContentDir();
   }
 
-  public getAssetFileDetails(fileName:string){ 
-    return this.getFileDetails(fileName,this.appContentDir);
-  }
-
-  private getFileDetails(fileName:string,contentDir:string){
+  private getFileDetails(fileName: string, contentDir: string) {
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
-    let path = `${this.repoUrl}/contents${contentDir}/${fileName}`; 
-    return this.apiservice.get<GithubFile>(path,params);
+    let path = `${this.repoUrl}/contents${contentDir}/${fileName}`;
+    return this.apiservice.get<GithubFile>(path, params);
   }
 
-  public getContentFromFile(fileName:string) : Observable<Video[]>{
-    return this.getFileDetails(fileName,this.appContentDir).pipe(
-      map((data) => {
-        let content = atob(data.content);
-        return JSON.parse(content) as Video[];
-      }));
-  }
-
-  public getStackFromFile(fileName:string){
-    return this.getFileDetails(fileName,this.appConfigDir).pipe(
-      map((data) => {
-        let content = atob(data.content);
-        return JSON.parse(content) as Option[];
-      }));
-  }
-  
-  public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string){
+  private saveFileContent(fileName: string, fileDir: string, fileContent: string, fileSha: string) {
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
-    let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`;
-    let user = { name: 'Deepak Keshri', email:'dkeshridev@gmail.com'} as GitCommitter;
+    let path = `${this.repoUrl}/contents${fileDir}/${fileName}`;
+    let user = { name: 'Deepak Keshri', email: 'dkeshridev@gmail.com' } as GitCommitter;
     let content = btoa(fileContent);
     let file = {} as GitCommitFile;
     file.message = "Save by App";
@@ -75,13 +45,31 @@ export class GithubService {
     file.content = content;
     file.sha = fileSha;
     file.branch = this.branchName;
-    return this.apiservice.put(path,file);
+    return this.apiservice.put(path, file);
   }
-  public getRootContentByBranchName(branchName?:string){
-    if(!branchName){
-      branchName = 'master';
-    }
-    return this.apiservice.get('/repos/{owner}/{repo}/contents?ref='+branchName);
+
+  public getAssetFileDetails(fileName: string) {
+    return this.getFileDetails(fileName, this.appContentDir);
+  }
+
+  public getContentFromFile(fileName: string): Observable<Video[]> {
+    return this.getFileDetails(fileName, this.appContentDir).pipe(
+      map((data) => {
+        let content = atob(data.content);
+        return JSON.parse(content) as Video[];
+      }));
+  }
+
+  public getStackFromFile(fileName: string) {
+    return this.getFileDetails(fileName, this.appConfigDir).pipe(
+      map((data) => {
+        let content = atob(data.content);
+        return JSON.parse(content) as Option[];
+      }));
+  }
+
+  public saveAssetFileContent(fileName: string, fileContent: string, fileSha: string) {
+    return this.saveFileContent(fileName, this.appContentDir, fileContent, fileSha);
   }
 
 }

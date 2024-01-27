@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   onShowTopicDialog() {
     const ref = this.dialogService.open(AddTopicComponent, {
       header: 'Add Topic',
-      width: '70%'
+      width: '80%'
     });
     ref.onClose.subscribe((isTopicAdded: number) => {
       
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
   onLogin(){
     const ref = this.dialogService.open(LoginComponent, {
       header: 'Enter PassKey',
-      width: '50%'
+      width: '70%'
     });
     ref.onClose.subscribe((isLogin: number) => {
       
