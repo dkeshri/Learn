@@ -1,4 +1,5 @@
 [
+    { "label": "all", "value": "All" },
     { "label": "javascript", "value": "JAVASCRIPT" },
     { "label": "css", "value": "CSS" },
     { "label": "dotnet", "value": "DOTNET" },
