@@ -33,7 +33,7 @@ export class GithubService {
     return this.apiservice.get<GithubFile>(path, params);
   }
 
-  private saveFileContent(fileName: string, fileDir: string, fileContent: string, fileSha: string) {
+  private saveFileContent(fileName: string, fileDir: string, fileContent: string, fileSha?: string) {
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
     let path = `${this.repoUrl}/contents${fileDir}/${fileName}`;
@@ -43,7 +43,9 @@ export class GithubService {
     file.message = "Save by App";
     file.committer = user;
     file.content = content;
-    file.sha = fileSha;
+    if(fileSha){
+      file.sha = fileSha;
+    }
     file.branch = this.branchName;
     return this.apiservice.put(path, file);
   }
@@ -68,8 +70,12 @@ export class GithubService {
       }));
   }
 
-  public saveAssetFileContent(fileName: string, fileContent: string, fileSha: string) {
+  public updateAssetFileContent(fileName: string, fileContent: string, fileSha: string) {
     return this.saveFileContent(fileName, this.appContentDir, fileContent, fileSha);
+  }
+
+  public createAssetFileSaveContent(fileName: string, fileContent: string) {
+    return this.saveFileContent(fileName, this.appContentDir, fileContent);
   }
 
 }
