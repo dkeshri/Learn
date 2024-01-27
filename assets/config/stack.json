@@ -1,0 +1,10 @@
+[
+    { "label": "javascript", "value": "JAVASCRIPT" },
+    { "label": "css", "value": "CSS" },
+    { "label": "dotnet", "value": "DOTNET" },
+    { "label": "other", "value": "OTHER" },
+    { "label": "azure", "value": "AZURE" },
+    { "label": "aws", "value": "AWS" },
+    { "label": "angular", "value": "ANGULAR" }
+
+]
