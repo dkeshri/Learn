@@ -3,6 +3,7 @@ export interface GithubFile{
     url:string;
     path:string;
     sha:string;
+    name:string;
 }
 
 export interface GitCommitFile{

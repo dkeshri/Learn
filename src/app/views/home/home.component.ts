@@ -8,6 +8,7 @@ import { HeaderService } from '../../services/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AddTopicComponent } from '../add-topic/add-topic.component';
 import { LoginComponent } from '../login/login.component';
+import { VideoContentService } from '../../services/video-content.service';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
     private otherContentService:OtherContentService,
     private dotnetContentService:DotnetContentService,
     private headerService:HeaderService,
+    private videoContentService:VideoContentService,
     private dialogService: DialogService
     ) { }
 
@@ -30,18 +32,15 @@ export class HomeComponent implements OnInit {
    searchedTopic!:string;
 
   ngOnInit(): void {
-    this.javascriptContent.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
+
+    this.videoContentService.getAllFilesName().subscribe((filesName)=>{
+      filesName.forEach((fileName)=>{
+        this.videoContentService.getAllContent(fileName).subscribe((data)=>{
+          this.videoList.push(...data);
+        });
+      });
     });
-    this.cssContenetService.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
-    });
-    this.otherContentService.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
-    });
-    this.dotnetContentService.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
-    });
+
     this.headerService.getSelectedStack.subscribe((selectedStack)=>{
       this.selectedStack = selectedStack;
     });

@@ -33,6 +33,13 @@ export class GithubService {
     return this.apiservice.get<GithubFile>(path, params);
   }
 
+  private getAllFilesInDir(dir:string){
+    let params = new HttpParams();
+    params = params.append('ref', this.branchName);
+    let path = `${this.repoUrl}/contents${dir}`;
+    return this.apiservice.get<GithubFile[]>(path, params);
+  }
+
   private saveFileContent(fileName: string, fileDir: string, fileContent: string, fileSha?: string) {
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
@@ -78,4 +85,8 @@ export class GithubService {
     return this.saveFileContent(fileName, this.appContentDir, fileContent);
   }
 
+  public getAllFileinContentDir(){
+    return this.getAllFilesInDir(this.appContentDir);
+  }
+  
 }
