@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { JavascriptContentService } from '../../services/javascript-content.service';
-import { CssContentService } from '../../services/css-content.service';
-import { OtherContentService } from '../../services/other-content.service';
-import { DotnetContentService } from '../../services/dotnet-content.service';
 import { Video } from '../../core/models/content.model';
 import { HeaderService } from '../../services/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AddTopicComponent } from '../add-topic/add-topic.component';
 import { LoginComponent } from '../login/login.component';
+import { VideoContentService } from '../../services/video-content.service';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +14,8 @@ import { LoginComponent } from '../login/login.component';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private javascriptContent:JavascriptContentService,
-    private cssContenetService:CssContentService,
-    private otherContentService:OtherContentService,
-    private dotnetContentService:DotnetContentService,
     private headerService:HeaderService,
+    private videoContentService:VideoContentService,
     private dialogService: DialogService
     ) { }
 
@@ -30,18 +24,15 @@ export class HomeComponent implements OnInit {
    searchedTopic!:string;
 
   ngOnInit(): void {
-    this.javascriptContent.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
+
+    this.videoContentService.getAllFilesName().subscribe((filesName)=>{
+      filesName.forEach((fileName)=>{
+        this.videoContentService.getAllContent(fileName).subscribe((data)=>{
+          this.videoList.push(...data);
+        });
+      });
     });
-    this.cssContenetService.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
-    });
-    this.otherContentService.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
-    });
-    this.dotnetContentService.getAllContent().subscribe((data)=>{
-      this.videoList.push(...data);
-    });
+
     this.headerService.getSelectedStack.subscribe((selectedStack)=>{
       this.selectedStack = selectedStack;
     });
@@ -53,7 +44,7 @@ export class HomeComponent implements OnInit {
   onShowTopicDialog() {
     const ref = this.dialogService.open(AddTopicComponent, {
       header: 'Add Topic',
-      width: '70%'
+      width: '80%'
     });
     ref.onClose.subscribe((isTopicAdded: number) => {
       
@@ -62,7 +53,7 @@ export class HomeComponent implements OnInit {
   onLogin(){
     const ref = this.dialogService.open(LoginComponent, {
       header: 'Enter PassKey',
-      width: '50%'
+      width: '70%'
     });
     ref.onClose.subscribe((isLogin: number) => {
       

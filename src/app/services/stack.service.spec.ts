@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DotnetContentService } from './dotnet-content.service';
+import { StackService } from './stack.service';
 
-describe('DotnetContentService', () => {
-  let service: DotnetContentService;
+describe('StackService', () => {
+  let service: StackService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DotnetContentService);
+    service = TestBed.inject(StackService);
   });
 
   it('should be created', () => {
