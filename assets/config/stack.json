@@ -1,11 +1,11 @@
 [
-    { "label": "all", "value": "All" },
-    { "label": "javascript", "value": "JAVASCRIPT" },
-    { "label": "css", "value": "CSS" },
-    { "label": "dotnet", "value": "DOTNET" },
-    { "label": "other", "value": "OTHER" },
-    { "label": "azure", "value": "AZURE" },
-    { "label": "aws", "value": "AWS" },
-    { "label": "angular", "value": "ANGULAR" }
+    { "label": "ALL", "value": "all" },
+    { "label": "JAVASCRIPT", "value": "javascript" },
+    { "label": "CSS", "value": "css" },
+    { "label": "DOTNET", "value": "dotnet" },
+    { "label": "OTHER", "value": "other" },
+    { "label": "AZURE", "value": "azure" },
+    { "label": "AWS", "value": "aws" },
+    { "label": "ANGULAR", "value": "angular" }
 
 ]
