@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../../../shared/models/option.model';
 import { HeaderService } from '../../../services/header.service';
+import { StackService } from '../../../services/stack.service';
 
 @Component({
   selector: 'app-header',
@@ -11,19 +12,17 @@ import { HeaderService } from '../../../services/header.service';
 export class HeaderComponent implements OnInit {
 
   constructor( 
-    private headerService : HeaderService
+    private headerService : HeaderService,
+    private stackService:StackService
   ) { }
   shopName: string = "Technology";
   selectedTech:string = '';
   searchTopic:string = '';
-  techOptions: Option[] = [
-    { label: "Javascript", value: "JAVASCRIPT" },
-    { label: "CSS", value: "CSS" },
-    { label: "DotNet", value: "DOTNET" },
-    { label: "Others", value: "OTHERS" }
-  ];
+  techOptions: Option[] = [];
   ngOnInit(): void {
-
+    this.stackService.getStackOption().subscribe((options)=>{
+      this.techOptions = options;
+    })
   }
   ngOnDestroy() {
 
