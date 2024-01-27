@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { JavascriptContentService } from '../../services/javascript-content.service';
-import { CssContentService } from '../../services/css-content.service';
-import { OtherContentService } from '../../services/other-content.service';
-import { DotnetContentService } from '../../services/dotnet-content.service';
 import { Video } from '../../core/models/content.model';
 import { HeaderService } from '../../services/header.service';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -18,10 +14,6 @@ import { VideoContentService } from '../../services/video-content.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private javascriptContent:JavascriptContentService,
-    private cssContenetService:CssContentService,
-    private otherContentService:OtherContentService,
-    private dotnetContentService:DotnetContentService,
     private headerService:HeaderService,
     private videoContentService:VideoContentService,
     private dialogService: DialogService
