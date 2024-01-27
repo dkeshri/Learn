@@ -8,6 +8,7 @@ import { GitCommitFile, GitCommitter, GithubFile } from '../views/Models/github-
 import { Video } from '../core/models/content.model';
 import { ConfigurationService } from '../core/services/configuration.service';
 import { Observable, map } from 'rxjs';
+import { Option } from '../shared/models/option.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class GithubService {
   private repoUrl = '/repos/{owner}/{repo}';
   private appContentDir = '/assets/contents';
   private branchName = 'gh-pages';
+  private appConfigDir = '/assets/config';
   constructor(
     private apiservice:ApiService,
     private localStorageService:LocalStorageService,
@@ -34,21 +36,33 @@ export class GithubService {
     this.localStorageService.set(AppConstant.PASSKEY,topic.token);
   }
 
-  public getAssetFileDetails(fileName:string){
+  public getAssetFileDetails(fileName:string){ 
+    return this.getFileDetails(fileName,this.appContentDir);
+  }
+
+  private getFileDetails(fileName:string,contentDir:string){
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
-    let path = `${this.repoUrl}/contents${this.appContentDir}/${fileName}`; 
+    let path = `${this.repoUrl}/contents${contentDir}/${fileName}`; 
     return this.apiservice.get<GithubFile>(path,params);
   }
 
   public getContentFromFile(fileName:string) : Observable<Video[]>{
-    return this.getAssetFileDetails(fileName).pipe(
+    return this.getFileDetails(fileName,this.appContentDir).pipe(
       map((data) => {
         let content = atob(data.content);
         return JSON.parse(content) as Video[];
       }));
   }
 
+  public getStackFromFile(fileName:string){
+    return this.getFileDetails(fileName,this.appConfigDir).pipe(
+      map((data) => {
+        let content = atob(data.content);
+        return JSON.parse(content) as Option[];
+      }));
+  }
+  
   public saveAssetFileContent(fileName:string,fileContent:string,fileSha:string){
     let params = new HttpParams();
     params = params.append('ref', this.branchName);
@@ -69,7 +83,5 @@ export class GithubService {
     }
     return this.apiservice.get('/repos/{owner}/{repo}/contents?ref='+branchName);
   }
-  private setPassKey(token:string){
-    this.localStorageService.set(AppConstant.PASSKEY,token);
-  }
+
 }
